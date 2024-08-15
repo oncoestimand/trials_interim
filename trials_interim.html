@@ -56,7 +56,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="trials_interim_files/libs/clipboard/clipboard.min.js"></script>
@@ -83,11 +103,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background"><span class="header-section-number">1</span> Background</a></li>
   <li><a href="#purpose-of-this-document" id="toc-purpose-of-this-document" class="nav-link" data-scroll-target="#purpose-of-this-document"><span class="header-section-number">2</span> Purpose of this document</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">3</span> Setup</a>
-  <ul class="collapse">
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">3.1</span> Packages</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4</span> References</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">3</span> Setup</a></li>
+  <li><a href="#specify-hypothetical-trial" id="toc-specify-hypothetical-trial" class="nav-link" data-scroll-target="#specify-hypothetical-trial"><span class="header-section-number">4</span> Specify hypothetical trial</a></li>
+  <li><a href="#add-interim-analyses" id="toc-add-interim-analyses" class="nav-link" data-scroll-target="#add-interim-analyses"><span class="header-section-number">5</span> Add interim analyses</a></li>
+  <li><a href="#reporting-of-the-trial" id="toc-reporting-of-the-trial" class="nav-link" data-scroll-target="#reporting-of-the-trial"><span class="header-section-number">6</span> Reporting of the trial</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
   </ul>
 </nav>
 </div>
@@ -128,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="background" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Background</h1>
-<p>Code for the paper written by an author team from regulators, academia, and industry.</p>
+<p>Code for the paper <em>Recommendations for the planning, conduct and reporting of clinical trials with interim analyses</em> written by an author team from regulators, academia, and industry.</p>
 </section>
 <section id="purpose-of-this-document" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Purpose of this document</h1>
@@ -136,135 +156,149 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setup" class="level1 tabset tabset-fade tabset-pills" data-number="3">
 <h1 class="tabset tabset-fade tabset-pills" data-number="3"><span class="header-section-number">3</span> Setup</h1>
-<section id="packages" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">3.1</span> Packages</h2>
+<p>Load rpact <span class="citation" data-cites="rpact">Wassmer and Pahlke (<a href="#ref-rpact" role="doc-biblioref">2024</a>)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># packages</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------------</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>packs <span class="ot">&lt;-</span> <span class="st">"rpact"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(packs)){<span class="fu">library</span>(packs[i], <span class="at">character.only =</span> <span class="cn">TRUE</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpact)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"rpact"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpact)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"rpact"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] '4.0.0'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># computations below with rpact Version &gt;= 4.0.0</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># computations below are done with rpact Version &gt;= 4.0.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="specify-hypothetical-trial" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Specify hypothetical trial</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># design specifications</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">*</span> <span class="dv">12</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">*</span> <span class="dv">12</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>hr <span class="ot">&lt;-</span> m1 <span class="sc">/</span> m2</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># further specifications</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>accrualTime <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">12</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>accrualIntensity <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>dropoutRate1 <span class="ot">&lt;-</span> <span class="fl">0.025</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>dropoutRate2 <span class="ot">&lt;-</span> <span class="fl">0.025</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>dropoutTime <span class="ot">&lt;-</span> <span class="dv">12</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>maxNumberOfSubjects <span class="ot">&lt;-</span> accrualIntensity <span class="sc">*</span> <span class="fu">max</span>(accrualTime)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Required events without interim</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>nevent <span class="ot">&lt;-</span> <span class="fu">getSampleSizeSurvival</span>(<span class="at">lambda1 =</span> <span class="fu">getLambdaByMedian</span>(m2), <span class="at">lambda2 =</span> <span class="fu">getLambdaByMedian</span>(m1), </span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sided =</span> <span class="dv">2</span>, <span class="at">alpha =</span> alpha, <span class="at">beta =</span> beta)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>mdd_no_interim <span class="ot">&lt;-</span> nevent<span class="sc">$</span>criticalValuesEffectScaleLower</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>nevent <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(nevent<span class="sc">$</span>maxNumberOfEvents)</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>nevent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># median OS</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="dv">6</span> <span class="sc">*</span> <span class="dv">12</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">*</span> <span class="dv">12</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>hr <span class="ot">&lt;-</span> m1 <span class="sc">/</span> m2</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># accrual and dropout</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>accrualTime <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">12</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>accrualIntensity <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>dropoutRate1 <span class="ot">&lt;-</span> <span class="fl">0.025</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>dropoutRate2 <span class="ot">&lt;-</span> <span class="fl">0.025</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>dropoutTime <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>maxNumberOfSubjects <span class="ot">&lt;-</span> accrualIntensity <span class="sc">*</span> <span class="fu">max</span>(accrualTime)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>First, compute number of required events without interim:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nevent <span class="ot">&lt;-</span> <span class="fu">getSampleSizeSurvival</span>(<span class="at">lambda1 =</span> <span class="fu">getLambdaByMedian</span>(m2), </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">lambda2 =</span> <span class="fu">getLambdaByMedian</span>(m1), </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">sided =</span> <span class="dv">2</span>, <span class="at">alpha =</span> alpha, <span class="at">beta =</span> beta)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mdd_no_interim <span class="ot">&lt;-</span> nevent<span class="sc">$</span>criticalValuesEffectScaleLower</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>nevent <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(nevent<span class="sc">$</span>maxNumberOfEvents)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>nevent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 380</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mdd_no_interim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mdd_no_interim</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       [,1]
 [1,] 0.8177</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># OBF design without interims (to get futility bound at second interim as per 1) above)</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I use OBF also for the first interim, although strictly speaking not needed.</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># it does not make a numerical difference though</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># one could make this "perfect" by using a hand-knitted alpha-spending function in rpact, but I did not bother to do so</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># can do once we put the script on github</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>info <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">2</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>designEff <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(<span class="at">informationRates =</span> info,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">typeOfDesign =</span> <span class="st">"asOF"</span>, <span class="at">sided =</span> <span class="dv">1</span>, </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">alpha =</span> alpha <span class="sc">/</span> <span class="dv">2</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>samplesizeEFF <span class="ot">&lt;-</span> <span class="fu">getSampleSizeSurvival</span>(<span class="at">design =</span> designEff,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">lambda2 =</span> <span class="fu">log</span>(<span class="dv">2</span>) <span class="sc">/</span> m1, <span class="at">hazardRatio =</span> hr,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">dropoutRate1 =</span> dropoutRate1, <span class="at">dropoutRate2 =</span> dropoutRate2, </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">dropoutTime =</span> dropoutTime,</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">accrualTime =</span> accrualTime, <span class="at">accrualIntensity =</span> accrualIntensity)</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># number of events</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>nevents <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">as.vector</span>(samplesizeEFF<span class="sc">$</span>eventsPerStage))</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># add exploratory updated analysis</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>nevents <span class="ot">&lt;-</span> <span class="fu">c</span>(nevents, <span class="dv">500</span>)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>nevents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>These are the total number of events needed without interim and the corresponding minimal detectable difference (MDD).</p>
+</section>
+<section id="add-interim-analyses" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Add interim analyses</h1>
+<p>We start with adding an interim using an O’Brien-Fleming group-sequential boundary. For simplicity, we also add an efficacy interim using OBF at the first interim. This would strictly speaking not be needed but does not make a numerical difference. One could properly design the first interim as futility only through a hand-knitted alpha-spending function in rpact.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>info <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">2</span> <span class="sc">/</span> <span class="dv">3</span>, <span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>designEff <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(<span class="at">informationRates =</span> info,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">typeOfDesign =</span> <span class="st">"asOF"</span>, <span class="at">sided =</span> <span class="dv">1</span>, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">alpha =</span> alpha <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>samplesizeEFF <span class="ot">&lt;-</span> <span class="fu">getSampleSizeSurvival</span>(<span class="at">design =</span> designEff,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">lambda2 =</span> <span class="fu">log</span>(<span class="dv">2</span>) <span class="sc">/</span> m1, <span class="at">hazardRatio =</span> hr,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">dropoutRate1 =</span> dropoutRate1, </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">dropoutRate2 =</span> dropoutRate2,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">dropoutTime =</span> dropoutTime,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">accrualTime =</span> accrualTime, </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">accrualIntensity =</span> accrualIntensity)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># number of events</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>nevents <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">as.vector</span>(samplesizeEFF<span class="sc">$</span>eventsPerStage))</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># add exploratory updated analysis</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>nevents <span class="ot">&lt;-</span> <span class="fu">c</span>(nevents, <span class="dv">500</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>nevents</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 129 257 385 500</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Local significance levels (two-sided)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> designEff<span class="sc">$</span>stageLevels <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>alphas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Local significance levels (two-sided)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> designEff<span class="sc">$</span>stageLevels <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>alphas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0002070114 0.0120243988 0.0462562478</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MDD </span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>hrMDD <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(samplesizeEFF<span class="sc">$</span>criticalValuesEffectScale)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>hrMDD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MDD </span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>hrMDD <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(samplesizeEFF<span class="sc">$</span>criticalValuesEffectScale)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>hrMDD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5190684 0.7306326 0.8159843</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analysis timepoints</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">round</span>(samplesizeEFF<span class="sc">$</span>analysisTime, <span class="dv">1</span>))</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># predict analysis time of updated analysis</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fl">76.3965</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>probEvent <span class="ot">&lt;-</span> <span class="fu">getEventProbabilities</span>(<span class="at">time =</span> grid, <span class="at">lambda1 =</span> <span class="fu">getLambdaByMedian</span>(m2), <span class="at">lambda2 =</span> <span class="fu">getLambdaByMedian</span>(m1),</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">dropoutRate1 =</span> dropoutRate1, <span class="at">dropoutRate2 =</span> dropoutRate2, </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">dropoutTime =</span> dropoutTime,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">accrualTime =</span> accrualTime, <span class="at">accrualIntensity =</span> accrualIntensity, </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">maxNumberOfSubjects =</span> maxNumberOfSubjects)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>expEvent <span class="ot">&lt;-</span> probEvent<span class="sc">$</span>overallEventProbabilities <span class="sc">*</span> maxNumberOfSubjects  </span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(grid, expEvent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># analysis timepoints</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">round</span>(samplesizeEFF<span class="sc">$</span>analysisTime, <span class="dv">1</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># predict analysis time of updated analysis</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fl">76.3965</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>probEvent <span class="ot">&lt;-</span> <span class="fu">getEventProbabilities</span>(<span class="at">time =</span> grid, <span class="at">lambda1 =</span> <span class="fu">getLambdaByMedian</span>(m2), </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">lambda2 =</span> <span class="fu">getLambdaByMedian</span>(m1),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">dropoutRate1 =</span> dropoutRate1, </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">dropoutRate2 =</span> dropoutRate2, </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">dropoutTime =</span> dropoutTime,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">accrualTime =</span> accrualTime, </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">accrualIntensity =</span> accrualIntensity, </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">maxNumberOfSubjects =</span> maxNumberOfSubjects)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>expEvent <span class="ot">&lt;-</span> probEvent<span class="sc">$</span>overallEventProbabilities <span class="sc">*</span> maxNumberOfSubjects  </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(grid, expEvent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        grid expEvent
 [1,] 76.3965 500.0003</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">c</span>(time, grid)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># power loss through the interims</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Futility HR and information at interim</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>futilityHR <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.9</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>eventsInterim <span class="ot">&lt;-</span> nevents[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Z-score corresponding to futilityHR </span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: Minus sign is added to be consistent with directionUpper = FALSE in getPowerSurvival call below.</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>allocationRatioPlanned <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>infoInterim <span class="ot">&lt;-</span> eventsInterim <span class="sc">*</span> allocationRatioPlanned<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> allocationRatioPlanned) <span class="sc">^</span> <span class="dv">2</span> <span class="co"># approximate info according to Schoenfeld's formula</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>ZscoreInterim <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(futilityHR) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">/</span> infoInterim)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>designFutility <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(<span class="at">sided =</span> <span class="dv">1</span>, <span class="at">alpha =</span> alpha <span class="sc">/</span> <span class="dv">2</span>,</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">informationRates =</span> info,</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">typeOfDesign =</span> <span class="st">"noEarlyEfficacy"</span>,</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">futilityBounds =</span> ZscoreInterim,</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">bindingFutility =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate power and timeline under H1 with original sample size if design includes </span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># the non-binding futility (and the futility boundary is adhered to)</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">getPowerSurvival</span>(designFutility,</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>                          <span class="at">allocationRatioPlanned =</span> allocationRatioPlanned,</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>                          <span class="at">lambda2 =</span> <span class="fu">log</span>(<span class="dv">2</span>) <span class="sc">/</span> m1, <span class="at">hazardRatio =</span> hr,</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                          <span class="at">dropoutRate1 =</span> dropoutRate1, <span class="at">dropoutRate2 =</span> dropoutRate2, <span class="at">dropoutTime =</span> dropoutTime,</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                          <span class="at">accrualTime =</span> accrualTime, <span class="at">accrualIntensity =</span> accrualIntensity,</span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>                          <span class="at">maxNumberOfEvents =</span> nevents[<span class="dv">3</span>], <span class="at">directionUpper =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(power)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="fu">c</span>(time, grid)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># power loss through the interims</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Futility HR and information at interim</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>futilityHR <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.9</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>eventsInterim <span class="ot">&lt;-</span> nevents[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Z-score corresponding to futilityHR </span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: Minus sign is added to be consistent with directionUpper = FALSE </span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># in getPowerSurvival call below.</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>allocationRatioPlanned <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># approximate info according to Schoenfeld's formula</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>infoInterim <span class="ot">&lt;-</span> eventsInterim <span class="sc">*</span> allocationRatioPlanned<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> allocationRatioPlanned) <span class="sc">^</span> <span class="dv">2</span> </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>ZscoreInterim <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(futilityHR) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">/</span> infoInterim)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>designFutility <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(<span class="at">sided =</span> <span class="dv">1</span>, <span class="at">alpha =</span> alpha <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">informationRates =</span> info,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">typeOfDesign =</span> <span class="st">"noEarlyEfficacy"</span>,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">futilityBounds =</span> ZscoreInterim,</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">bindingFutility =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate power and timeline under H1 with original sample size if design includes </span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co"># the non-binding futility (and the futility boundary is adhered to)</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">getPowerSurvival</span>(designFutility,</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>                          <span class="at">allocationRatioPlanned =</span> allocationRatioPlanned,</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>                          <span class="at">lambda2 =</span> <span class="fu">log</span>(<span class="dv">2</span>) <span class="sc">/</span> m1, <span class="at">hazardRatio =</span> hr,</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>                          <span class="at">dropoutRate1 =</span> dropoutRate1, <span class="at">dropoutRate2 =</span> dropoutRate2, </span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>                          <span class="at">dropoutTime =</span> dropoutTime,</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>                          <span class="at">accrualTime =</span> accrualTime, <span class="at">accrualIntensity =</span> accrualIntensity,</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>                          <span class="at">maxNumberOfEvents =</span> nevents[<span class="dv">3</span>], <span class="at">directionUpper =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(power)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><em>Power calculation for a survival endpoint</em></p>
 <p>Sequential analysis with a maximum of 3 looks (group sequential design), overall significance level 2.5% (one-sided). The results were calculated for a two-sample logrank test, H0: hazard ratio = 1, power directed towards smaller values, H1: hazard ratio = 0.75, control lambda(2) = 0.01, maximum number of events = 385, accrual time = 12, accrual intensity = 100, dropout rate(1) = 0.025, dropout rate(2) = 0.025, dropout time = 12.</p>
@@ -405,32 +439,392 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>(t)</em>: treatment effect scale</li>
 </ul>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dates of analyses</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attache Paket: 'lubridate'</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Die folgenden Objekte sind maskiert von 'package:base':
-
-    date, intersect, setdiff, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fpi <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2020-04-23"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">30</span> <span class="sc">*</span> (time <span class="sc">-</span> <span class="fu">floor</span>(time)))</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(fpi, fpi <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="fu">floor</span>(time)) <span class="sc">+</span> <span class="fu">days</span>(d))</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>dates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Finally, we compute the actual dates of the analyses, relying on an assumed first patient in date:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(lubridate))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fpi <span class="ot">&lt;-</span> <span class="fu">ymd</span>(<span class="st">"2020-04-23"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">30</span> <span class="sc">*</span> (time <span class="sc">-</span> <span class="fu">floor</span>(time)))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(fpi, fpi <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="fu">floor</span>(time)) <span class="sc">+</span> <span class="fu">days</span>(d))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>dates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2020-04-23" "2021-12-14" "2023-04-10" "2024-11-16" "2026-09-04"</code></pre>
 </div>
 </div>
 </section>
+<section id="reporting-of-the-trial" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Reporting of the trial</h1>
+<p>To illustrate trial simulation we first need to make a few own functions available:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------------</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># functions</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------------------</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Quantile function for a Weibull with a potential cure proportion.</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>qWeibullCure <span class="ot">&lt;-</span> <span class="cf">function</span>(p, p0, <span class="at">shape =</span> <span class="dv">1</span>, scale){</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(p))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  ind1 <span class="ot">&lt;-</span> (p <span class="sc">&lt;=</span> p0)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  ind2 <span class="ot">&lt;-</span> (p <span class="sc">&gt;</span> p0)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  res[ind1] <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  res[ind2] <span class="ot">&lt;-</span> <span class="fu">qweibull</span>(<span class="dv">1</span> <span class="sc">-</span> (p[ind2] <span class="sc">-</span> p0) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> p0), <span class="at">shape =</span> shape, <span class="at">scale =</span> scale)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)  </span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate Weibull distributed time-to-event data in one group, </span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># where administrative censoring is applied after a pre-specified</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co"># number of events. A cure proportion and censoring due to drop-out </span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># can be specified in addition.</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>rWeibull1arm <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">shape =</span> <span class="dv">1</span>, scale, <span class="at">cure =</span> <span class="dv">0</span>, recruit, <span class="at">dropout =</span> <span class="dv">0</span>, </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>                         <span class="at">start.accrual =</span> <span class="dv">0</span>, cutoff, <span class="at">seed =</span> <span class="cn">NA</span>){</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># shape             Weibull shape parameter. </span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale:            Weibull scale parameter.</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cure:             Proportion of patients assumed to be cured, i.e. with an </span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                   event at +infty.</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># recruit:          Recruitment.</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># dropout:          Drop-out rate, on same time scale as med.</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start.accrual:    Time unit where accrual should start. Might be useful when </span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                   simulating multi-stage trials.</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cutoff:           Cutoff, #events the final censored data should have </span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                   (can be a vector of multiple cutoffs).</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># seed:             If different from NA, seed used to generate random numbers.</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">#</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Kaspar Rufibach, June 2014</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(seed) <span class="sc">==</span> <span class="cn">FALSE</span>){<span class="fu">set.seed</span>(seed)}</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">sum</span>(recruit)</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate arrival times</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>  arrive <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(recruit), <span class="at">times =</span> recruit)</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>  arrivetime <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){arrivetime[i] <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min =</span> arrive[i] <span class="sc">-</span> <span class="dv">1</span>, <span class="at">max =</span> arrive[i])}</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>  arrivetime <span class="ot">&lt;-</span> start.accrual <span class="sc">+</span> <span class="fu">sort</span>(arrivetime)</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate event times: Exp(lambda) = Weibull(shape = 1, scale = 1 / lambda)</span></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>  eventtime <span class="ot">&lt;-</span> <span class="fu">qWeibullCure</span>(<span class="fu">runif</span>(n), <span class="at">p0 =</span> cure, <span class="at">shape =</span> shape, <span class="at">scale =</span> scale)</span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Apply drop-out. Do this before applying the cutoff below, </span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># in order to correctly count necessary #events.</span></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>  dropouttime <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">Inf</span>, n)</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (dropout <span class="sc">&gt;</span> <span class="dv">0</span>){dropouttime <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n, <span class="at">rate =</span> dropout)}</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>  event.dropout <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(eventtime <span class="sc">&gt;</span> dropouttime, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>  time.dropout <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(event.dropout <span class="sc">==</span> <span class="dv">1</span>, eventtime, dropouttime)   </span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># observed times, taking into account staggered entry</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>  tottime <span class="ot">&lt;-</span> arrivetime <span class="sc">+</span> eventtime</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># find cutoff based on number of targeted events</span></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># only look among patients that are not considered dropped-out</span></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>  time <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> <span class="fu">length</span>(cutoff), <span class="at">nrow =</span> n))</span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>  event <span class="ot">&lt;-</span> time</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>  cutoff.time <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(cutoff))</span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cutoff)){</span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>    cutoff.time[j] <span class="ot">&lt;-</span> <span class="fu">sort</span>(tottime[event.dropout <span class="sc">==</span> <span class="dv">1</span>])[cutoff[j]]</span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># apply administrative censoring at cutoff</span></span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>    event[event.dropout <span class="sc">==</span> <span class="dv">1</span>, j] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>      tottime[event.dropout <span class="sc">==</span> <span class="dv">1</span>] <span class="sc">&gt;</span> cutoff.time[j], <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>    event[event.dropout <span class="sc">==</span> <span class="dv">0</span>, j] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define time to event, taking into account both types of censoring</span></span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>    time[event.dropout <span class="sc">==</span> <span class="dv">1</span>, j] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(event[, j] <span class="sc">==</span> <span class="dv">1</span>, </span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a>                                          eventtime, cutoff.time[j] <span class="sc">-</span> </span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>                                            arrivetime)[event.dropout <span class="sc">==</span> <span class="dv">1</span>]    </span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>    time[event.dropout <span class="sc">==</span> <span class="dv">0</span>, j] <span class="ot">&lt;-</span> <span class="fu">pmin</span>(cutoff.time[j] <span class="sc">-</span> arrivetime, </span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>                                        time.dropout)[event.dropout <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove times for patients arriving after the cutoff</span></span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>    rem <span class="ot">&lt;-</span> (arrivetime <span class="sc">&gt;</span> cutoff.time[j])</span>
+<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="cn">TRUE</span> <span class="sc">%in%</span> rem){time[rem, j] <span class="ot">&lt;-</span> <span class="cn">NA</span>}</span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate output</span></span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="dv">1</span><span class="sc">:</span>n, arrivetime, eventtime, tottime, dropouttime, time, event))</span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pat"</span>, <span class="st">"arrivetime"</span>, <span class="st">"eventtime"</span>, <span class="st">"tottime"</span>, <span class="st">"dropouttime"</span>, </span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">paste</span>(<span class="st">"time cutoff = "</span>, cutoff, <span class="at">sep =</span> <span class="st">""</span>), </span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">paste</span>(<span class="st">"event cutoff = "</span>, cutoff, <span class="at">sep =</span> <span class="st">""</span>))</span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"cutoff.time"</span> <span class="ot">=</span> cutoff.time, <span class="st">"tab"</span> <span class="ot">=</span> tab)</span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate Weibull distributed time-to-event data in two arms, </span></span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a><span class="co"># where administrative censoring is applied after a pre-specified </span></span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a><span class="co"># number of events. A cure proportion and censoring due to drop-out </span></span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a><span class="co"># can be specified in addition.</span></span>
+<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a>rWeibull2arm <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">shape =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), scale, <span class="at">cure =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), recruit, </span>
+<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a>                         <span class="at">dropout =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">start.accrual =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), cutoff, <span class="at">seed =</span> <span class="cn">NA</span>){</span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a>  <span class="co"># shape             2-d vector of Weibull shape parameter. </span></span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale             2-d vector of Weibull scale parameter.</span></span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cure:             2-d vector with cure proportion assumed in each arm.</span></span>
+<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>  <span class="co"># recruit:          List with two elements, vector of </span></span>
+<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                   recruitment in each arm.</span></span>
+<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>  <span class="co"># dropout:          2-d vector with drop-out rate for each arm, </span></span>
+<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                   on same time scale as med.</span></span>
+<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start.accrual:    2-d vector of time when accrual should start. </span></span>
+<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                   Might be useful when simulating multi-stage trials.</span></span>
+<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cutoff:           Cutoff, #events the final censored data should have </span></span>
+<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                   (can be a vector of multiple cutoffs).</span></span>
+<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a>  <span class="co"># seed:             If different from NA, seed used to generate random numbers.</span></span>
+<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a>  <span class="co">#</span></span>
+<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Kaspar Rufibach, June 2014</span></span>
+<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(seed) <span class="sc">==</span> <span class="cn">FALSE</span>){<span class="fu">set.seed</span>(seed)}</span>
+<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a>  dat1 <span class="ot">&lt;-</span> <span class="fu">rWeibull1arm</span>(<span class="at">scale =</span> scale[<span class="dv">1</span>], <span class="at">shape =</span> shape[<span class="dv">1</span>], <span class="at">recruit =</span> recruit[[<span class="dv">1</span>]], </span>
+<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cutoff =</span> <span class="dv">1</span>, <span class="at">dropout =</span> dropout[<span class="dv">1</span>], <span class="at">cure =</span> cure[<span class="dv">1</span>], </span>
+<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>                       <span class="at">start.accrual =</span> start.accrual[<span class="dv">1</span>], <span class="at">seed =</span> <span class="cn">NA</span>)<span class="sc">$</span>tab</span>
+<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a>  dat2 <span class="ot">&lt;-</span> <span class="fu">rWeibull1arm</span>(<span class="at">scale =</span> scale[<span class="dv">2</span>], <span class="at">shape =</span> shape[<span class="dv">2</span>], <span class="at">recruit =</span> recruit[[<span class="dv">2</span>]], </span>
+<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a>                       <span class="at">cutoff =</span> <span class="dv">1</span>, <span class="at">dropout =</span> dropout[<span class="dv">2</span>], <span class="at">cure =</span> cure[<span class="dv">2</span>], </span>
+<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a>                       <span class="at">start.accrual =</span> start.accrual[<span class="dv">2</span>], <span class="at">seed =</span> <span class="cn">NA</span>)<span class="sc">$</span>tab</span>
+<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">nrow</span>(dat1), <span class="fu">nrow</span>(dat2))</span>
+<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a>  <span class="co"># treatment variable</span></span>
+<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>  tmt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, n[<span class="dv">1</span>]), <span class="fu">rep</span>(<span class="dv">1</span>, n[<span class="dv">2</span>])), <span class="at">levels =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>))</span>
+<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>  arrivetime <span class="ot">&lt;-</span> <span class="fu">c</span>(dat1[, <span class="st">"arrivetime"</span>], dat2[, <span class="st">"arrivetime"</span>])</span>
+<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a>  eventtime <span class="ot">&lt;-</span> <span class="fu">c</span>(dat1[, <span class="st">"eventtime"</span>], dat2[, <span class="st">"eventtime"</span>])</span>
+<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a>  tottime <span class="ot">&lt;-</span> <span class="fu">c</span>(dat1[, <span class="st">"tottime"</span>], dat2[, <span class="st">"tottime"</span>])</span>
+<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a>  dropouttime <span class="ot">&lt;-</span> <span class="fu">c</span>(dat1[, <span class="st">"dropouttime"</span>], dat2[, <span class="st">"dropouttime"</span>])</span>
+<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Apply drop-out. Do this before applying the cutoff below, </span></span>
+<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>  <span class="co">#in order to correctly count necessary #events.</span></span>
+<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a>  event.dropout <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(eventtime <span class="sc">&gt;</span> dropouttime, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a>  time.dropout <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(event.dropout <span class="sc">==</span> <span class="dv">1</span>, eventtime, dropouttime)   </span>
+<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a>  <span class="co"># find cutoff based on number of targeted events</span></span>
+<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a>  <span class="co"># only look among patients that are not considered dropped-out</span></span>
+<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a>  time <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> <span class="fu">length</span>(cutoff), <span class="at">nrow =</span> <span class="fu">sum</span>(n)))</span>
+<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a>  event <span class="ot">&lt;-</span> time</span>
+<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a>  cutoff.time <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(cutoff))</span>
+<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(cutoff)){</span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a>    cutoff.time[j] <span class="ot">&lt;-</span> <span class="fu">sort</span>(tottime[event.dropout <span class="sc">==</span> <span class="dv">1</span>])[cutoff[j]]</span>
+<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a>    <span class="co"># apply administrative censoring at cutoff</span></span>
+<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a>    event[event.dropout <span class="sc">==</span> <span class="dv">1</span>, j] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(tottime[event.dropout <span class="sc">==</span> <span class="dv">1</span>] <span class="sc">&gt;</span> </span>
+<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a>                                             cutoff.time[j], <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a>    event[event.dropout <span class="sc">==</span> <span class="dv">0</span>, j] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define time to event, taking into account both types of censoring</span></span>
+<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a>    time[event.dropout <span class="sc">==</span> <span class="dv">1</span>, j] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(event[, j] <span class="sc">==</span> <span class="dv">1</span>, eventtime, </span>
+<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a>                                    cutoff.time[j] <span class="sc">-</span> arrivetime)[event.dropout <span class="sc">==</span> <span class="dv">1</span>]    </span>
+<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a>    time[event.dropout <span class="sc">==</span> <span class="dv">0</span>, j] <span class="ot">&lt;-</span> <span class="fu">pmin</span>(cutoff.time[j] <span class="sc">-</span> arrivetime, </span>
+<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a>                                    time.dropout)[event.dropout <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove times for patients arriving after the cutoff</span></span>
+<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a>    rem <span class="ot">&lt;-</span> (arrivetime <span class="sc">&gt;</span> cutoff.time[j])</span>
+<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="cn">TRUE</span> <span class="sc">%in%</span> rem){time[rem, j] <span class="ot">&lt;-</span> <span class="cn">NA</span>}</span>
+<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generate output</span></span>
+<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">sum</span>(n), tmt, arrivetime, eventtime, tottime, </span>
+<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a>                          dropouttime, time, event))</span>
+<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(tab) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pat"</span>, <span class="st">"tmt"</span>, <span class="st">"arrivetime"</span>, <span class="st">"eventtime"</span>, <span class="st">"tottime"</span>, </span>
+<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"dropouttime"</span>, <span class="fu">paste</span>(<span class="st">"time cutoff = "</span>, cutoff, <span class="at">sep =</span> <span class="st">""</span>), </span>
+<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">paste</span>(<span class="st">"event cutoff = "</span>, cutoff, <span class="at">sep =</span> <span class="st">""</span>))</span>
+<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"cutoff.time"</span> <span class="ot">=</span> cutoff.time, <span class="st">"tab"</span> <span class="ot">=</span> tab)</span>
+<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, generate trial data to reproduce numbers in Section 6 of paper, using appropriate seeds:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># accrual</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>recruit1 <span class="ot">&lt;-</span> <span class="fu">rep</span>(accrualIntensity <span class="sc">/</span> <span class="dv">2</span>, <span class="fu">max</span>(accrualTime))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>recruit2 <span class="ot">&lt;-</span> recruit1</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>recruit <span class="ot">&lt;-</span> <span class="fu">list</span>(recruit1, recruit2)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">unlist</span>(recruit))</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>start.accrual <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># drop-out (2.5% annually)</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>dropout.year <span class="ot">&lt;-</span> <span class="fl">0.025</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>dropout.month <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> dropout.year) <span class="sc">/</span> <span class="dv">12</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>dropout <span class="ot">&lt;-</span> <span class="fu">rep</span>(dropout.month, <span class="dv">2</span>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co"># cure proportion </span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>cure <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate a trial stopped for futility</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> <span class="fu">c</span>(m1, m1)</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">2</span>) <span class="sc">/</span> med</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>scale <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> lambda</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>cut1 <span class="ot">&lt;-</span> nevents[j] <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>trial1 <span class="ot">&lt;-</span> <span class="fu">rWeibull2arm</span>(<span class="at">scale =</span> scale, <span class="at">shape =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), </span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cure =</span> cure, <span class="at">recruit =</span> recruit, <span class="at">dropout =</span> dropout, </span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>                        <span class="at">start.accrual =</span> start.accrual, <span class="at">cutoff =</span> cut1, </span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>                        <span class="at">seed =</span> <span class="dv">8</span>)</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>tmt <span class="ot">&lt;-</span> trial1<span class="sc">$</span>tab[<span class="st">"tmt"</span>][, <span class="dv">1</span>]</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> trial1<span class="sc">$</span>tab[<span class="fu">paste</span>(<span class="st">"time cutoff = "</span>, cut1, <span class="at">sep =</span> <span class="st">""</span>)][, <span class="dv">1</span>]</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>event <span class="ot">&lt;-</span> trial1<span class="sc">$</span>tab[<span class="fu">paste</span>(<span class="st">"event cutoff = "</span>, cut1, <span class="at">sep =</span> <span class="st">""</span>)][, <span class="dv">1</span>]</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>cox1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> tmt))</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>HR1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(cox1)[<span class="dv">1</span>])</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">coef</span>(cox1)[<span class="dv">1</span>, <span class="st">"Pr(&gt;|z|)"</span>]</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>HR1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.071779</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6906199</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cut1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 132</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># date of CCOD</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>trial1<span class="sc">$</span>cutoff.time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.2883</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">30</span> <span class="sc">*</span> (trial1<span class="sc">$</span>cutoff.time <span class="sc">-</span> <span class="fu">floor</span>(trial1<span class="sc">$</span>cutoff.time)))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fpi, fpi <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="fu">floor</span>(trial1<span class="sc">$</span>cutoff.time)) <span class="sc">+</span> <span class="fu">days</span>(d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2020-04-23" "2021-11-01"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate a trial stopped for efficacy</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --------------------------------------------------</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>med <span class="ot">&lt;-</span> m1 <span class="sc">/</span> <span class="fu">c</span>(<span class="dv">1</span>, hr)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">2</span>) <span class="sc">/</span> med</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>scale <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> lambda</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>j <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>cut2 <span class="ot">&lt;-</span> nevents[j] <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>trial2 <span class="ot">&lt;-</span> <span class="fu">rWeibull2arm</span>(<span class="at">scale =</span> scale, <span class="at">shape =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), </span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cure =</span> cure, <span class="at">recruit =</span> recruit, <span class="at">dropout =</span> dropout, </span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>                        <span class="at">start.accrual =</span> start.accrual, <span class="at">cutoff =</span> cut2, </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                        <span class="at">seed =</span> <span class="dv">7</span>)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>tmt <span class="ot">&lt;-</span> trial2<span class="sc">$</span>tab[<span class="st">"tmt"</span>][, <span class="dv">1</span>]</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> trial2<span class="sc">$</span>tab[<span class="fu">paste</span>(<span class="st">"time cutoff = "</span>, cut2, <span class="at">sep =</span> <span class="st">""</span>)][, <span class="dv">1</span>]</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>event <span class="ot">&lt;-</span> trial2<span class="sc">$</span>tab[<span class="fu">paste</span>(<span class="st">"event cutoff = "</span>, cut2, <span class="at">sep =</span> <span class="st">""</span>)][, <span class="dv">1</span>]</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>cox2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> tmt))</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>HR2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(cox2)[<span class="dv">1</span>])</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>ci2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">confint</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(time, event) <span class="sc">~</span> tmt)))</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">coef</span>(cox2)[<span class="dv">1</span>, <span class="st">"Pr(&gt;|z|)"</span>]</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>hrMDD[j]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7306326</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>HR2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6868411</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ci2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         2.5 %    97.5 %
+tmtB 0.5354192 0.8810866</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.003113957</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>cut2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 255</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>trial2<span class="sc">$</span>cutoff.time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34.67596</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># recalculate local significance level based on observed number of events</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>info2 <span class="ot">&lt;-</span> <span class="fu">c</span>(info[<span class="dv">1</span>], cut2 <span class="sc">/</span> nevents[<span class="dv">3</span>], <span class="dv">1</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>designUpdate2 <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(<span class="at">sided =</span> <span class="dv">1</span>, <span class="at">alpha =</span> alpha <span class="sc">/</span> <span class="dv">2</span>, </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">beta =</span> beta,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">informationRates =</span> info2, </span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">typeOfDesign =</span> <span class="st">"asOF"</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>samplesize2 <span class="ot">&lt;-</span> <span class="fu">getSampleSizeSurvival</span>(<span class="at">design =</span> designUpdate2,</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">lambda2 =</span> <span class="fu">log</span>(<span class="dv">2</span>) <span class="sc">/</span> m1, <span class="at">hazardRatio =</span> hr,</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">dropoutRate1 =</span> dropoutRate1, </span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">dropoutRate2 =</span> dropoutRate2,</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">dropoutTime =</span> dropoutTime,</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">accrualTime =</span> accrualTime, </span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">accrualIntensity =</span> accrualIntensity)</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>alphas2 <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(samplesize2<span class="sc">$</span>criticalValuesPValueScale)</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>hrMDD2 <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(samplesize2<span class="sc">$</span>criticalValuesEffectScale)</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="co"># original and updated local significance levels</span></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(alphas, alphas2 <span class="sc">*</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               [,1]       [,2]       [,3]
+alphas 0.0002070114 0.01202440 0.04625625
+       0.0002070114 0.01169829 0.04635103</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(hrMDD, hrMDD2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            [,1]      [,2]      [,3]
+hrMDD  0.5190684 0.7306326 0.8159843
+hrMDD2 0.5190204 0.7289663 0.8160329</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># median unbiased estimate, assuming the futility interim had happened </span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># at the prespecified number of events with an observed HR of 0.9</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>results2 <span class="ot">&lt;-</span> <span class="fu">getDataset</span>(</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">overallEvents =</span> <span class="fu">c</span>(nevents[<span class="dv">1</span>], cut2),</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">overallLogRanks =</span> <span class="fu">c</span>(<span class="fu">log</span>(<span class="fl">0.9</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">4</span> <span class="sc">/</span> nevents[<span class="dv">1</span>]), <span class="fu">coef</span>(cox2)[<span class="dv">1</span>, <span class="st">"z"</span>]),</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">overallAllocationRatio =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>adj_result2 <span class="ot">&lt;-</span> <span class="fu">getAnalysisResults</span>(<span class="at">design =</span> designUpdate2,</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">dataInput =</span> results2,</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">stage =</span> <span class="dv">2</span>, <span class="at">directionUpper =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[PROGRESS] Stage results calculated [0.0038 secs] 
+[PROGRESS] Conditional power calculated [0.0025 secs] 
+[PROGRESS] Conditional rejection probabilities (CRP) calculated [4e-04 secs] 
+[PROGRESS] Repeated confidence interval of stage 1 calculated [0.043 secs] 
+[PROGRESS] Repeated confidence interval of stage 2 calculated [0.0728 secs] 
+[PROGRESS] Repeated confidence interval calculated [0.1163 secs] 
+[PROGRESS] Repeated p-values of stage 1 calculated [0.3826 secs] 
+[PROGRESS] Repeated p-values of stage 2 calculated [0.2795 secs] 
+[PROGRESS] Repeated p-values calculated [0.6627 secs] 
+[PROGRESS] Final p-value calculated [9e-04 secs] 
+[PROGRESS] Final confidence interval calculated [0.0098 secs] </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>adj_result2<span class="sc">$</span>medianUnbiasedEstimates[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6908581</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(adj_result2<span class="sc">$</span>finalConfidenceIntervalLowerBounds[<span class="dv">2</span>], </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  adj_result2<span class="sc">$</span>finalConfidenceIntervalUpperBounds[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5403963 0.8834608</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># date of CCOD</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>trial2<span class="sc">$</span>cutoff.time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 34.67596</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">30</span> <span class="sc">*</span> (trial2<span class="sc">$</span>cutoff.time <span class="sc">-</span> <span class="fu">floor</span>(trial2<span class="sc">$</span>cutoff.time)))</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fpi, fpi <span class="sc">%m+%</span> <span class="fu">months</span>(<span class="fu">floor</span>(trial2<span class="sc">$</span>cutoff.time)) <span class="sc">+</span> <span class="fu">days</span>(d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2020-04-23" "2023-03-15"</code></pre>
+</div>
+</div>
 </section>
-<section id="references" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> References</h1>
+<section id="references" class="level1 unnumbered" data-number="7">
+
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">7 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-rpact" class="csl-entry" role="listitem">
+Wassmer, Gernot, and Friedrich Pahlke. 2024. <em>Rpact: Confirmatory Adaptive Clinical Trial Design and Analysis</em>. <a href="https://CRAN.R-project.org/package=rpact">https://CRAN.R-project.org/package=rpact</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
