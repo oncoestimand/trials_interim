@@ -1,10 +1,8 @@
-# Quantification of follow-up
+# Recommendations for the planning, conduct and reporting of clinical trials with interim analyses
 
-* [github repository](https://github.com/oncoestimand/quantFU)
-* [markdown file](https://oncoestimand.github.io/quantFU/quantFU.html)
-* [preprint on arxiv](https://arxiv.org/abs/2206.05216)
-* [Publication](https://doi.org/10.1002/pst.2300)
+* [github repository](https://github.com/oncoestimand/trials_interim)
+* [markdown file](https://oncoestimand.github.io/trials_interim/trials_interim.html)
 
 Authors: 
 
-* [Kaspar Rufibach](mailto:kaspar.rufibach@roche.com)
+* [Kaspar Rufibach](mailto:kaspar.rufibach@gmail.com)
