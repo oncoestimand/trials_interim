@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Kaspar Rufibach, on behalf of the author team">
-<meta name="dcterms.date" content="2024-08-15">
+<meta name="dcterms.date" content="2024-10-11">
 
-<title>Recommendations for the planning, conduct and reporting of clinical trials with interim analyses: code accompanying the paper</title>
+<title>Considerations for the planning, conduct and reporting of clinical trials with interim analyses: code accompanying the paper</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -111,13 +111,13 @@ div.csl-indent {
   </ul>
 </nav>
 </div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Recommendations for the planning, conduct and reporting of clinical trials with interim analyses: code accompanying the paper</h1>
+<h1 class="title">Considerations for the planning, conduct and reporting of clinical trials with interim analyses: code accompanying the paper</h1>
 </div>
 
 
@@ -134,7 +134,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 15, 2024</p>
+      <p class="date">October 11, 2024</p>
     </div>
   </div>
   
@@ -148,11 +148,11 @@ div.csl-indent {
 
 <section id="background" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Background</h1>
-<p>Code for the paper <em>Recommendations for the planning, conduct and reporting of clinical trials with interim analyses</em> written by an author team from regulators, academia, and industry.</p>
+<p>Code for the paper <em>Recommendations for the planning, conduct and reporting of clinical trials with interim analyses</em>, Asikanius et al. <span class="citation" data-cites="asikanius_24">(<a href="#ref-asikanius_24" role="doc-biblioref">2024</a>)</span>, written by an author team of statisticians from regulators, academia, and industry.</p>
 </section>
 <section id="purpose-of-this-document" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Purpose of this document</h1>
-<p>This R markdown file provides easy accessible code to compute all the quantities in the paper. The github repository where this document is hosted is available <a href="https://github.com/oncoestimand/trials_interim">here</a>.</p>
+<p>This R Quarto file provides easy accessible code to compute all the quantities in the paper. The github repository where this document is hosted is available <a href="https://github.com/oncoestimand/trials_interim">here</a>.</p>
 </section>
 <section id="setup" class="level1 tabset tabset-fade tabset-pills" data-number="3">
 <h1 class="tabset tabset-fade tabset-pills" data-number="3"><span class="header-section-number">3</span> Setup</h1>
@@ -782,17 +782,17 @@ hrMDD2 0.5190204 0.7289663 0.8160329</code></pre>
 <span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">dataInput =</span> results2,</span>
 <span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">stage =</span> <span class="dv">2</span>, <span class="at">directionUpper =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[PROGRESS] Stage results calculated [0.0038 secs] 
-[PROGRESS] Conditional power calculated [0.0025 secs] 
+<pre><code>[PROGRESS] Stage results calculated [0.0036 secs] 
+[PROGRESS] Conditional power calculated [0.0026 secs] 
 [PROGRESS] Conditional rejection probabilities (CRP) calculated [4e-04 secs] 
-[PROGRESS] Repeated confidence interval of stage 1 calculated [0.043 secs] 
-[PROGRESS] Repeated confidence interval of stage 2 calculated [0.0728 secs] 
-[PROGRESS] Repeated confidence interval calculated [0.1163 secs] 
-[PROGRESS] Repeated p-values of stage 1 calculated [0.3826 secs] 
-[PROGRESS] Repeated p-values of stage 2 calculated [0.2795 secs] 
-[PROGRESS] Repeated p-values calculated [0.6627 secs] 
-[PROGRESS] Final p-value calculated [9e-04 secs] 
-[PROGRESS] Final confidence interval calculated [0.0098 secs] </code></pre>
+[PROGRESS] Repeated confidence interval of stage 1 calculated [0.0404 secs] 
+[PROGRESS] Repeated confidence interval of stage 2 calculated [0.0726 secs] 
+[PROGRESS] Repeated confidence interval calculated [0.1134 secs] 
+[PROGRESS] Repeated p-values of stage 1 calculated [0.3709 secs] 
+[PROGRESS] Repeated p-values of stage 2 calculated [0.274 secs] 
+[PROGRESS] Repeated p-values calculated [0.6458 secs] 
+[PROGRESS] Final p-value calculated [6e-04 secs] 
+[PROGRESS] Final confidence interval calculated [0.0094 secs] </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>adj_result2<span class="sc">$</span>medianUnbiasedEstimates[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -821,6 +821,9 @@ hrMDD2 0.5190204 0.7289663 0.8160329</code></pre>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">7 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-asikanius_24" class="csl-entry" role="listitem">
+Asikanius, Elina, Benjamin Hofner, Lisa V. Hampson, Gernot Wassmer, Christopher Jennison, Tobias Mielke, Cornelia Ursula Kunz, and Kaspar Rufibach. 2024. <span>“Considerations for the Planning, Conduct and Reporting of Clinical Trials with Interim Analyses.”</span> <a href="https://arxiv.org/abs/2410.01478">https://arxiv.org/abs/2410.01478</a>.
+</div>
 <div id="ref-rpact" class="csl-entry" role="listitem">
 Wassmer, Gernot, and Friedrich Pahlke. 2024. <em>Rpact: Confirmatory Adaptive Clinical Trial Design and Analysis</em>. <a href="https://CRAN.R-project.org/package=rpact">https://CRAN.R-project.org/package=rpact</a>.
 </div>
@@ -861,18 +864,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -904,7 +896,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -912,7 +926,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

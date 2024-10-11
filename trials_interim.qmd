@@ -1,5 +1,5 @@
 ---
-title: "Recommendations for the planning, conduct and reporting of clinical trials with interim analyses: code accompanying the paper"
+title: "Considerations for the planning, conduct and reporting of clinical trials with interim analyses: code accompanying the paper"
 author: "Kaspar Rufibach, on behalf of the author team"
 date: 'Last modification: `r Sys.setlocale("LC_TIME", "C"); format(Sys.Date(), "%d %b %Y")`'
 format:
@@ -15,11 +15,11 @@ bibliography: stat.bib
 
 # Background
 
-Code for the paper _Recommendations for the planning, conduct and reporting of clinical trials with interim analyses_ written by an author team from regulators, academia, and industry.
+Code for the paper _Recommendations for the planning, conduct and reporting of clinical trials with interim analyses_, Asikanius et al. [-@asikanius_24], written by an author team of statisticians from regulators, academia, and industry.
 
 # Purpose of this document
 
-This R markdown file provides easy accessible code to compute all the quantities in the paper. The github repository where this document is hosted is available [here](https://github.com/oncoestimand/trials_interim).
+This R Quarto file provides easy accessible code to compute all the quantities in the paper. The github repository where this document is hosted is available [here](https://github.com/oncoestimand/trials_interim).
 
 # Setup {.tabset .tabset-fade .tabset-pills}
 
