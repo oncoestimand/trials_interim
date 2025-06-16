@@ -15,7 +15,7 @@ bibliography: stat.bib
 
 # Background
 
-Code for the paper _Recommendations for the planning, conduct and reporting of clinical trials with interim analyses_, Asikanius et al. [-@asikanius_24], written by an author team of statisticians from regulators, academia, and industry.
+Code for the paper _Clinical trials with interim analyses: Standardizing Terminology to increase clarity_, Asikanius et al. [-@asikanius_24], written by an author team of statisticians from regulators, academia, and industry.
 
 # Purpose of this document
 
